@@ -171,22 +171,21 @@ $$h(r) = r(u+r) \equiv r\cdot 0 \equiv 0 \mod{qs}$$
 Notice that since we have that $f(r), g(r), h(r)$ are all equal to $0\mod{qs}$, any combination of them will also be equal to $0\mod{qs}$. (For example: $g(x) + h(x) + 2f(x)$ will still be $0\mod{qs}$)
 
 How does this help us? Let $c(x)$ be a linear combination of $f(x),g(x),h(x)$, then we know that $c(r) \equiv 0 \mod{qs}$, so $c(r)$ could be equal to $0, qs, 2qs, \dots$ etc.$ But what if we knew that $|c(r)| < qs$? Then the only possible value that $c(r)$ could take would be $0$ and we would know for a fact that $c(r) = 0$ straight up, no modular math needed. To generate such a combination, we can actually use a lattice algorithm known as LLL. LLL guarantees an upper limit on the size of one of the vectors (which we associate with a polynomial) that it spits out. It turns out that for our case, this vector is small enough to satisfy our constraint of $|c(r)| < qs$. We first construct our lattice using the three polynomials we found above to get
-$$
+```math
 \begin{bmatrix}
-x^2 & u & 0 \\
-0 & x & u \\
-0 & 0 & n_1\cdot n_2
-\end{bmatrix}
-$$
+    x^2 & u & 0 \\
+    0 & x & u \\
+    0 & 0 & n_1\cdot n_2
+    \end{bmatrix}
+```
 This actually won't work since we don't know the value of $x$, so we will replace it with a number that we do know. We know that $x < 2^{502}$ since it represents the lower $502$ bits of $qs$. Let this bound be $R = 2^{502}$. Then we instead run LLL on the lattice
-
-$$
+```math
 \begin{bmatrix}
-R^2 & uR & 0 \\
-0 & R & u \\
-0 & 0 & n_1\cdot n_2
-\end{bmatrix}
-$$
+    R^2 & uR & 0 \\
+    0 & R & u \\
+    0 & 0 & n_1\cdot n_2
+    \end{bmatrix}
+```
 Why will this work instead? Well, let the polynomial that is output instead be $c(R)$. Since $r < R$, we should have $|c(r)| < |c(R)| < qs$. 
 
 Let the short vector that comes out be $(aR^2, bR, c)$. This vector represents $c(R)$, so we extract the coefficients then solve
