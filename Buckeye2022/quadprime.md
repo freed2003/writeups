@@ -4,7 +4,7 @@ A sequal to the problem "twin prime" which attempts to make the implementation m
 
 The code given to us in this problem is as follows
 
-```python=
+```python
 import Crypto.Util.number as cun
 
 p = cun.getPrime(500)
@@ -109,7 +109,7 @@ And wish to find a fractional expression that we hope will give us $p$ and $s$. 
 
 Fortunately for us, sagemath actually has support for continued fractions built in with methods to give us the values for the convergents. Usually I'd say to homeroll as much of your code as you can to gain a better understanding, but in this case the implementation for calculating the convergents is pretty simple and given the time pressure for CTFs there's no reason not to just use sage's implementaiton.
 
-```python=
+```python
 import Crypto.Util.number as cun
 
 e = 0x10001
